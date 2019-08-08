@@ -7,7 +7,7 @@ import useDebounce from "../hooks/useDebounce";
 const App = () => {
   const [input, setInput] = useState("");
   const [data, setData] = useState([]);
-  const search = useDebounce(input, 400);
+  const search = useDebounce(input, 300);
 
   const handleChange = e => {
     setInput(e.target.value);
@@ -25,6 +25,12 @@ const App = () => {
     };
     loadStudentData();
   }, [search]);
+
+  useEffect(() => {
+    if (input === "") {
+      setData([]);
+    }
+  }, [input]);
 
   return (
     <div className="App">
