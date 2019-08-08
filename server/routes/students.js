@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
         .limit(size)
         .skip(size * offset)
         .sort({ nim_prodi: 1 })
-        .select("nama nim_tpb nim_prodi fakultas jurusan angkatan _id"),
+        .select("nama nim_tpb nim_prodi fakultas prodi angkatan _id"),
       Student.countDocuments(mongoQuery)
     ]);
     return res.json({
