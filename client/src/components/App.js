@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { asyncFetchStudentData } from "../utils/fetch";
 import Table from "./Table";
+import Input from "./Input";
 import useDebounce from "../hooks/useDebounce";
 
 const App = () => {
@@ -9,8 +10,8 @@ const App = () => {
   // const [response, setResponse] = useState({});
   const search = useDebounce(input, 300);
 
-  const handleChange = e => {
-    setInput(e.target.value);
+  const handleChange = input => {
+    setInput(input);
   };
 
   useEffect(() => {
@@ -37,12 +38,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <input
-        type="text"
-        placeholder="Masukkan nama atau NIM"
-        name="input"
-        onChange={handleChange}
-      />
+      <Input handleAppChange={handleChange} />
       <Table data={data} />
     </div>
   );
