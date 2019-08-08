@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
     const searchQuery = new Student(req.body);
     const errorObj = searchQuery.validateSync();
     if (errorObj) {
-      res.json({
+      return res.json({
         message: errorObj.message
       });
     }
@@ -50,7 +50,7 @@ router.post("/", async (req, res) => {
         .select("nama nim_tpb nim_prodi fakultas jurusan angkatan -_id"),
       Student.countDocuments(mongoQuery)
     ]);
-    res.json({
+    return res.json({
       query,
       size,
       offset,
@@ -58,10 +58,8 @@ router.post("/", async (req, res) => {
       data
     });
   } catch (e) {
-    // res.json({
-    //   message: e
-    // });
-    next(e);
+    console.log(e);
+    return res.json({ msg: e });
   }
 });
 module.exports = router;
