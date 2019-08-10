@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
     const errorObj = searchQuery.validateSync();
     if (errorObj) {
       return res.json({
-        message: errorObj.message
+        msg: errorObj.message
       });
     }
     const regex = new RegExp(`.*${query}.*`);
