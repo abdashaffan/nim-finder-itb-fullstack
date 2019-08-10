@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const asyncFetchStudentData = async ({ query, size, offset = 0 }) => {
   try {
-    if (query.trim().length === 0) {
+    if (!query || query.trim().length === 0) {
       return {};
     }
     const body = {
