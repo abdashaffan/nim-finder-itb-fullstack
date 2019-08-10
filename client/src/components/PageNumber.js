@@ -1,50 +1,50 @@
 import React from "react";
 
-const PageNumber = ({ total, size, currentPage }) => {
+const PageNumber = ({ total, size, currentPage, handlePageClick }) => {
   let pageNumbers = [];
   for (let i = 1; i <= Math.ceil(total / size); i++) {
     pageNumbers.push(i);
   }
-
-  const handlePageClick = num => {
-    console.log(num);
-  };
   return (
     <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class={"page-item " + (currentPage === 1 ? "disabled" : "")}>
+      <ul className="pagination">
+        <li
+          className={"page-item " + (currentPage === 1 ? "disabled" : "")}
+          style={{ cursor: "pointer" }}
+        >
           <span
-            class="page-link"
+            className="page-link"
             aria-label="Previous"
-            onClick={handlePageClick(currentPage - 1)}
+            onClick={() => handlePageClick(currentPage - 1)}
           >
             <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Previous</span>
+            <span className="sr-only">Previous</span>
           </span>
         </li>
         {pageNumbers.map(num => (
           <li
             key={num}
-            class={"page-item " + (currentPage === num ? "active" : "")}
+            className={"page-item " + (currentPage === num ? "active" : "")}
+            style={{ cursor: "pointer" }}
+            onClick={() => handlePageClick(num)}
           >
-            <span class="page-link" onClick={handlePageClick(currentPage)}>
-              {num}
-            </span>
+            <span className="page-link">{num}</span>
           </li>
         ))}
         <li
-          class={
+          className={
             "page-item " +
             (currentPage === pageNumbers.length ? "disabled" : "")
           }
+          style={{ cursor: "pointer" }}
         >
           <span
-            class="page-link"
+            className="page-link"
             aria-label="Next"
-            onClick={handlePageClick(currentPage + 1)}
+            onClick={() => handlePageClick(currentPage + 1)}
           >
             <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Next</span>
+            <span className="sr-only">Next</span>
           </span>
         </li>
       </ul>

@@ -3,16 +3,15 @@ import { Table } from "reactstrap";
 import PropTypes from "prop-types";
 import PageNumber from "./PageNumber";
 
-const TableData = ({ response, loading }) => {
+const TableData = ({ response, loading, handlePageClick }) => {
   const { count, data, offset, size } = response;
 
   if (loading) {
-    return <h3>Loading</h3>;
+    return <h3>Loading..</h3>;
   } else {
-    if (data) {
+    if (data && data.length > 0) {
       return (
         <>
-          <PageNumber total={count} size={size} currentPage={offset + 1} />
           <Table responsive size="sm" hover borderless>
             <thead>
               <tr>
@@ -47,7 +46,12 @@ const TableData = ({ response, loading }) => {
               )}
             </tbody>
           </Table>
-          <PageNumber total={count} size={size} currentPage={offset + 1} />
+          <PageNumber
+            total={count}
+            size={size}
+            currentPage={offset + 1}
+            handlePageClick={handlePageClick}
+          />
         </>
       );
     }

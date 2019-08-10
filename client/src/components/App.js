@@ -8,6 +8,8 @@ const App = () => {
   const [input, setInput] = useState("");
   const [response, setResponse] = useState({});
   const [loading, setLoading] = useState(false);
+  const [size, setSize] = useState(20);
+  const [offset, setOffset] = useState(0);
 
   const search = useDebounce(input, 400);
 
@@ -16,8 +18,8 @@ const App = () => {
       setLoading(true);
       const res = await asyncFetchStudentData({
         query: search,
-        size: 20,
-        offset: 0
+        size,
+        offset
       });
       if (res.data || res.msg) {
         setResponse(res);
@@ -27,16 +29,25 @@ const App = () => {
       setLoading(false);
     };
     loadStudentData();
-  }, [search]);
+  }, [offset, search, size]);
 
   const handleChange = input => {
     setInput(input);
   };
 
+  const handlePageClick = num => {
+    console.log(num);
+    setOffset(num - 1);
+  };
+
   return (
     <div className="App">
       <Input handleAppChange={handleChange} />
-      <Table response={response} loading={loading} />
+      <Table
+        response={response}
+        loading={loading}
+        handlePageClick={handlePageClick}
+      />
     </div>
   );
 };
