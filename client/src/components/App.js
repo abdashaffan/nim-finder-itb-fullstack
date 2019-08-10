@@ -6,40 +6,37 @@ import useDebounce from "../hooks/useDebounce";
 
 const App = () => {
   const [input, setInput] = useState("");
-  const [data, setData] = useState([]);
-  // const [response, setResponse] = useState({});
-  const search = useDebounce(input, 300);
+  const [response, setResponse] = useState({});
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = input => {
-    setInput(input);
-  };
+  const search = useDebounce(input, 400);
 
   useEffect(() => {
     const loadStudentData = async () => {
+      setLoading(true);
       const res = await asyncFetchStudentData({
         query: search,
         size: 20,
         offset: 0
       });
-      if (res && res.data) {
-        console.log(res);
-        // setResponse(res);
-        setData(res.data);
+      if (res.data || res.msg) {
+        setResponse(res);
+      } else {
+        setResponse({});
       }
+      setLoading(false);
     };
     loadStudentData();
   }, [search]);
 
-  useEffect(() => {
-    if (input === "") {
-      setData([]);
-    }
-  }, [input]);
+  const handleChange = input => {
+    setInput(input);
+  };
 
   return (
     <div className="App">
       <Input handleAppChange={handleChange} />
-      <Table data={data} />
+      <Table response={response} loading={loading} />
     </div>
   );
 };
