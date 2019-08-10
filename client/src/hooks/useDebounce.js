@@ -4,11 +4,11 @@ const useDebounce = (value, delay) => {
   const [search, setSearch] = useState(null);
 
   useEffect(() => {
-    const throttled = setTimeout(() => {
+    const throttled = setInterval(() => {
       setSearch(value);
     }, delay);
     return () => {
-      clearTimeout(throttled);
+      clearInterval(throttled);
     };
   }, [delay, value]);
 
