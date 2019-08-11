@@ -1,17 +1,39 @@
-import React from "react";
-import { Table } from "reactstrap";
-import PropTypes from "prop-types";
-import PageNumber from "./PageNumber";
-import Loader from "./Loader";
-import uuidv4 from "uuid/v4";
 
-const TableData = ({
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import uuidv4 from "uuid/v4";
+import PageNumber from "./PageNumber";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: "100%"
+  },
+  paper: {
+    marginTop: theme.spacing(3),
+    width: "100%",
+    overflowX: "auto",
+    marginBottom: theme.spacing(2)
+  },
+  table: {
+    minWidth: 650
+  }
+}));
+
+
+export default function TableData({
   response,
   loading,
   handlePageClick,
   handleSort,
   sort
-}) => {
+}) {
+  const classes = useStyles();
   const { count, data, offset, size } = response;
   const keys = [
     "nama",
@@ -31,28 +53,31 @@ const TableData = ({
     }
     return <span> {key.replace("_", " ").toUpperCase()}</span>;
   };
-  if (loading) {
-    return <Loader />;
-  } else {
-    if (data && data.length > 0) {
-      return (
-        <>
-          <Table responsive size="xs" hover borderless>
-            <thead>
-              <tr key={uuidv4()}>
-                {keys.map(key => (
-                  <th
-                    key={uuidv4()}
-                    onClick={() => handleSort(key)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    {toggleSort(key)}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {data.map(
+  return (
+    <div className={classes.root}>
+      <Paper className={classes.paper}>
+        <Table className={classes.table} size="small">
+          <TableHead>
+            <TableRow>
+              {keys.map(key => (
+                <TableCell
+                  key={uuidv4()}
+                  onClick={() => handleSort(key)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {toggleSort(key)}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {loading ? (
+              <TableRow>
+                <TableCell>Loading...</TableCell>
+              </TableRow>
+            ) : (
+              data &&
+              data.map(
                 ({
                   _id,
                   nim_tpb,
@@ -62,32 +87,28 @@ const TableData = ({
                   nama,
                   fakultas
                 }) => (
-                  <tr key={_id}>
-                    <td>{nama}</td>
-                    <td>{nim_prodi}</td>
-                    <td>{nim_tpb}</td>
-                    <td>{prodi}</td>
-                    <td>{fakultas}</td>
-                    <td>{angkatan}</td>
-                  </tr>
+                  <TableRow key={_id}>
+                    <TableCell>{nama}</TableCell>
+                    <TableCell>{nim_prodi}</TableCell>
+                    <TableCell>{nim_tpb}</TableCell>
+                    <TableCell>{prodi}</TableCell>
+                    <TableCell>{fakultas}</TableCell>
+                    <TableCell>{angkatan}</TableCell>
+                  </TableRow>
                 )
-              )}
-            </tbody>
-          </Table>
-          <PageNumber
-            total={count}
-            size={size}
-            currentPage={offset + 1}
-            handlePageClick={handlePageClick}
-          />
-        </>
-      );
-    }
-  }
-  return <></>;
-};
-
-TableData.propTypes = {
-  response: PropTypes.object.isRequired
-};
-export default TableData;
+              )
+            )}
+          </TableBody>
+        </Table>
+      </Paper>
+      {data && (
+        <PageNumber
+          total={count}
+          size={size}
+          currentPage={offset + 1}
+          handlePageClick={handlePageClick}
+        />
+      )}
+    </div>
+  );
+}
