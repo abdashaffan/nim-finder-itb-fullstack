@@ -2,6 +2,7 @@ import React from "react";
 
 const PageNumber = ({ total, size, currentPage, handlePageClick }) => {
   const totalPageNumber = Math.ceil(total / size);
+  if (totalPageNumber === 1) return <></>;
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination">
