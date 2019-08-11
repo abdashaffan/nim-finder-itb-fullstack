@@ -1,14 +1,16 @@
-
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
+import TableCell from "@material-ui/core/TableCell";
+import TableFooter from "@material-ui/core/TableFooter";
+import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import uuidv4 from "uuid/v4";
 import PageNumber from "./PageNumber";
+
+import uuidv4 from "uuid/v4";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,14 +27,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-
-export default function TableData({
+const TableData = ({
   response,
   loading,
   handlePageClick,
   handleSort,
+  handleChangeRowsPerPage,
   sort
-}) {
+}) => {
   const classes = useStyles();
   const { count, data, offset, size } = response;
   const keys = [
@@ -99,16 +101,30 @@ export default function TableData({
               )
             )}
           </TableBody>
+          {data && data.length > 0 && (
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25]}
+                  colSpan={3}
+                  count={count}
+                  rowsPerPage={size}
+                  page={offset}
+                  SelectProps={{
+                    inputProps: { "aria-label": "rows per page" },
+                    native: true
+                  }}
+                  onChangePage={handlePageClick}
+                  onChangeRowsPerPage={handleChangeRowsPerPage}
+                  ActionsComponent={PageNumber}
+                />
+              </TableRow>
+            </TableFooter>
+          )}
         </Table>
       </Paper>
-      {data && (
-        <PageNumber
-          total={count}
-          size={size}
-          currentPage={offset + 1}
-          handlePageClick={handlePageClick}
-        />
-      )}
     </div>
   );
-}
+};
+
+export default TableData;

@@ -44,7 +44,7 @@ const App = () => {
   };
 
   const handlePageClick = num => {
-    setSearch({ ...search, offset: num - 1 });
+    setSearch({ ...search, offset: num });
   };
 
   const handleSort = key => {
@@ -56,6 +56,9 @@ const App = () => {
       setSortType({ name: key, toggle: 1 });
     }
   };
+  const handleChangeRowsPerPage = num => {
+    setSearch({ ...search, size: num, offset: 0 });
+  };
 
   return (
     <div className="App">
@@ -66,6 +69,7 @@ const App = () => {
         handlePageClick={handlePageClick}
         handleSort={handleSort}
         sort={sortType}
+        handleChangeRowsPerPage={handleChangeRowsPerPage}
       />
     </div>
   );
