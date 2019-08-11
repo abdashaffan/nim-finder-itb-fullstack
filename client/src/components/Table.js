@@ -32,7 +32,7 @@ const TableData = ({
   loading,
   handlePageClick,
   handleSort,
-  handleChangeRowsPerPage,
+  handleChangeRows,
   sort
 }) => {
   const classes = useStyles();
@@ -54,6 +54,9 @@ const TableData = ({
       }
     }
     return <span> {key.replace("_", " ").toUpperCase()}</span>;
+  };
+  const handleChangeRowsPerPage = e => {
+    handleChangeRows(parseInt(e.target.value));
   };
   return (
     <div className={classes.root}>
@@ -105,7 +108,7 @@ const TableData = ({
             <TableFooter>
               <TableRow>
                 <TablePagination
-                  rowsPerPageOptions={[5, 10, 25]}
+                  rowsPerPageOptions={[10, 20, 25, 100]}
                   colSpan={3}
                   count={count}
                   rowsPerPage={size}

@@ -28,7 +28,6 @@ const PageNumber = props => {
   }
 
   function handleNextButtonClick() {
-    console.log(page + 1);
     onChangePage(page + 1);
   }
 

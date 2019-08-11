@@ -9,7 +9,7 @@ const App = () => {
   const [search, setSearch] = useState({
     query: "",
     offset: 0,
-    size: 20
+    size: 10
   });
   const [sortType, setSortType] = useState({ name: "nim_prodi", toggle: 1 });
   const firstUpdate = useRef(true);
@@ -56,7 +56,7 @@ const App = () => {
       setSortType({ name: key, toggle: 1 });
     }
   };
-  const handleChangeRowsPerPage = num => {
+  const handleChangeRows = num => {
     setSearch({ ...search, size: num, offset: 0 });
   };
 
@@ -69,7 +69,7 @@ const App = () => {
         handlePageClick={handlePageClick}
         handleSort={handleSort}
         sort={sortType}
-        handleChangeRowsPerPage={handleChangeRowsPerPage}
+        handleChangeRows={handleChangeRows}
       />
     </div>
   );
