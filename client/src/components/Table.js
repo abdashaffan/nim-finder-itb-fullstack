@@ -9,6 +9,7 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import PageNumber from "./PageNumber";
+import Loader from "./Loader";
 
 import uuidv4 from "uuid/v4";
 
@@ -59,74 +60,77 @@ const TableData = ({
     handleChangeRows(parseInt(e.target.value));
   };
   return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <Table className={classes.table} size="small">
-          <TableHead>
-            <TableRow>
-              {keys.map(key => (
-                <TableCell
-                  key={uuidv4()}
-                  onClick={() => handleSort(key)}
-                  style={{ cursor: "pointer" }}
-                >
-                  {toggleSort(key)}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {loading ? (
+    <>
+      <div className={classes.root}>
+        <Paper className={classes.paper}>
+          <Table className={classes.table} size="small">
+            <TableHead>
               <TableRow>
-                <TableCell>Loading...</TableCell>
+                {keys.map(key => (
+                  <TableCell
+                    key={uuidv4()}
+                    onClick={() => handleSort(key)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {toggleSort(key)}
+                  </TableCell>
+                ))}
               </TableRow>
-            ) : (
-              data &&
-              data.map(
-                ({
-                  _id,
-                  nim_tpb,
-                  nim_prodi,
-                  angkatan,
-                  prodi,
-                  nama,
-                  fakultas
-                }) => (
-                  <TableRow key={_id}>
-                    <TableCell>{nama}</TableCell>
-                    <TableCell>{nim_prodi}</TableCell>
-                    <TableCell>{nim_tpb}</TableCell>
-                    <TableCell>{prodi}</TableCell>
-                    <TableCell>{fakultas}</TableCell>
-                    <TableCell>{angkatan}</TableCell>
-                  </TableRow>
+            </TableHead>
+            <TableBody>
+              {loading ? (
+                <TableRow>
+                  <TableCell>Loading...</TableCell>
+                </TableRow>
+              ) : (
+                data &&
+                data.map(
+                  ({
+                    _id,
+                    nim_tpb,
+                    nim_prodi,
+                    angkatan,
+                    prodi,
+                    nama,
+                    fakultas
+                  }) => (
+                    <TableRow key={_id}>
+                      <TableCell>{nama}</TableCell>
+                      <TableCell>{nim_prodi}</TableCell>
+                      <TableCell>{nim_tpb}</TableCell>
+                      <TableCell>{prodi}</TableCell>
+                      <TableCell>{fakultas}</TableCell>
+                      <TableCell>{angkatan}</TableCell>
+                    </TableRow>
+                  )
                 )
-              )
+              )}
+            </TableBody>
+            {data && data.length > 0 && (
+              <TableFooter>
+                <TableRow>
+                  <TablePagination
+                    rowsPerPageOptions={[10, 20, 25, 100]}
+                    colSpan={3}
+                    count={count}
+                    rowsPerPage={size}
+                    page={offset}
+                    SelectProps={{
+                      inputProps: { "aria-label": "rows per page" },
+                      native: true
+                    }}
+                    onChangePage={handlePageClick}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                    ActionsComponent={PageNumber}
+                  />
+                </TableRow>
+              </TableFooter>
             )}
-          </TableBody>
-          {data && data.length > 0 && (
-            <TableFooter>
-              <TableRow>
-                <TablePagination
-                  rowsPerPageOptions={[10, 20, 25, 100]}
-                  colSpan={3}
-                  count={count}
-                  rowsPerPage={size}
-                  page={offset}
-                  SelectProps={{
-                    inputProps: { "aria-label": "rows per page" },
-                    native: true
-                  }}
-                  onChangePage={handlePageClick}
-                  onChangeRowsPerPage={handleChangeRowsPerPage}
-                  ActionsComponent={PageNumber}
-                />
-              </TableRow>
-            </TableFooter>
-          )}
-        </Table>
-      </Paper>
-    </div>
+          </Table>
+        </Paper>
+      </div>
+      {loading && <Loader />}
+    </>
   );
 };
 

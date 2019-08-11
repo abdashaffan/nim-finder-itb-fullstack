@@ -1,11 +1,21 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
-const Loader = () => (
-  <div className="d-flex justify-content-center align-items-center">
-    <div className="spinner-border" role="status">
-      <span className="sr-only">Loading...</span>
+const useStyles = makeStyles({
+  root: {
+    flexGrow: 1
+  }
+});
+
+const Loader = () => {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <LinearProgress />
     </div>
-  </div>
-);
+  );
+};
 
 export default Loader;
