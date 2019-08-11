@@ -20,8 +20,6 @@ const PageNumber = ({ total, size, currentPage, handlePageClick }) => {
           </span>
         </li>
 
-        {currentPage > 1 && (
-          <>
             <li
               className={"page-item " + (currentPage === 1 ? "disabled" : "")}
               style={{ cursor: "pointer" }}
@@ -34,15 +32,11 @@ const PageNumber = ({ total, size, currentPage, handlePageClick }) => {
                 Previous
               </span>
             </li>
-          </>
-        )}
 
         <li className="page-item disabled">
           <span className="page-link">{currentPage}</span>
         </li>
 
-        {currentPage < totalPageNumber && (
-          <>
             <li
               className={
                 "page-item " +
@@ -58,8 +52,6 @@ const PageNumber = ({ total, size, currentPage, handlePageClick }) => {
                 Next
               </span>
             </li>
-          </>
-        )}
 
         <li
           className={
