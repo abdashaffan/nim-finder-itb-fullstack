@@ -30,14 +30,14 @@ const PageNumber = ({ total, size, currentPage, handlePageClick }) => {
                 aria-label="Previous"
                 onClick={() => handlePageClick(currentPage - 1)}
               >
-                {currentPage - 1}
+                Previous
               </span>
             </li>
           </>
         )}
 
         <li className="page-item disabled">
-          <span className="page-link">...</span>
+          <span className="page-link">{currentPage}</span>
         </li>
 
         {currentPage < totalPageNumber && (
@@ -54,7 +54,7 @@ const PageNumber = ({ total, size, currentPage, handlePageClick }) => {
                 aria-label="Next"
                 onClick={() => handlePageClick(currentPage + 1)}
               >
-                {currentPage + 1}
+                Next
               </span>
             </li>
           </>

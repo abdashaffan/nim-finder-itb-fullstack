@@ -11,15 +11,14 @@ const App = () => {
     offset: 0,
     size: 20
   });
+  const [sortType, setSortType] = useState({ name: "nim_prodi", toggle: 1 });
 
   useEffect(() => {
     let source = { token: null };
     const loadStudentData = async () => {
       setLoading(true);
-      const res = await asyncFetchStudentData(search, source);
-      console.log("TOKEN: ", source.token);
+      const res = await asyncFetchStudentData({ ...search, sortType }, source);
       if (res.data || res.msg) {
-        console.log("RES :", res);
         setResponse(res);
       } else {
         setResponse({});
@@ -33,7 +32,7 @@ const App = () => {
         source.token.cancel();
       }
     };
-  }, [search]);
+  }, [search, sortType]);
 
   const handleChange = query => {
     setSearch({ ...search, query, offset: 0 });
@@ -43,6 +42,16 @@ const App = () => {
     setSearch({ ...search, offset: num - 1 });
   };
 
+  const handleSort = key => {
+    if (key === sortType.name) {
+      //toggle only
+      setSortType({ ...sortType, toggle: -1 * sortType.toggle });
+    } else {
+      //change sort key
+      setSortType({ name: key, toggle: 1 });
+    }
+  };
+
   return (
     <div className="App">
       <Input handleAppChange={handleChange} />
@@ -50,6 +59,8 @@ const App = () => {
         response={response}
         loading={loading}
         handlePageClick={handlePageClick}
+        handleSort={handleSort}
+        sort={sortType}
       />
     </div>
   );

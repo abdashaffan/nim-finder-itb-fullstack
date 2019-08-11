@@ -12,8 +12,8 @@ process.on("unhandledRejection", (reason, promise) => {
 
 router.post("/", async (req, res) => {
   try {
-    const { query, size, offset } = req.body;
-    const searchQuery = new Student(req.body);
+    const { query, size, offset, sortType } = req.body;
+    const searchQuery = new Student({query,size,offset});
     const errorObj = searchQuery.validateSync();
     if (errorObj) {
       return res.json({
@@ -45,7 +45,7 @@ router.post("/", async (req, res) => {
       Student.find(mongoQuery)
         .limit(size)
         .skip(size * offset)
-        .sort({ nim_prodi: 1 })
+        .sort({ [sortType.name]: sortType.toggle })
         .select("nama nim_tpb nim_prodi fakultas prodi angkatan _id"),
       Student.countDocuments(mongoQuery)
     ]);

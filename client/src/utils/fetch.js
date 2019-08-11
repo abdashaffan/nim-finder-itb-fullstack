@@ -15,7 +15,6 @@ export const asyncFetchStudentData = async (body, source) => {
     const res = await axios.post("api/students", body, {
       cancelToken: source.token.token
     });
-    console.log(res);
     return res.data;
   } catch (err) {
     if (axios.isCancel(err)) {
