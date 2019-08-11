@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { asyncFetchStudentData } from "../utils/fetch";
 import Table from "./Table";
 import Input from "./Input";
@@ -12,19 +12,24 @@ const App = () => {
     size: 20
   });
   const [sortType, setSortType] = useState({ name: "nim_prodi", toggle: 1 });
-
+  const firstUpdate = useRef(true);
   useEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
     let source = { token: null };
     const loadStudentData = async () => {
       setLoading(true);
       const res = await asyncFetchStudentData({ ...search, sortType }, source);
       if (res.data || res.msg) {
         setResponse(res);
+        setLoading(false);
       } else {
         setResponse({});
       }
-      setLoading(false);
     };
+
     loadStudentData();
 
     return () => {

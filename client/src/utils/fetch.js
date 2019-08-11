@@ -18,7 +18,6 @@ export const asyncFetchStudentData = async (body, source) => {
     return res.data;
   } catch (err) {
     if (axios.isCancel(err)) {
-      console.log("Request canceled for query: ", body.query);
     } else {
       console.log(err);
     }

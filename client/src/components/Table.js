@@ -2,6 +2,8 @@ import React from "react";
 import { Table } from "reactstrap";
 import PropTypes from "prop-types";
 import PageNumber from "./PageNumber";
+import Loader from "./Loader";
+import uuidv4 from "uuid/v4";
 
 const TableData = ({
   response,
@@ -30,16 +32,17 @@ const TableData = ({
     return <span> {key.replace("_", " ").toUpperCase()}</span>;
   };
   if (loading) {
-    return <h3>Loading..</h3>;
+    return <Loader />;
   } else {
     if (data && data.length > 0) {
       return (
         <>
           <Table responsive size="xs" hover borderless>
             <thead>
-              <tr>
+              <tr key={uuidv4()}>
                 {keys.map(key => (
                   <th
+                    key={uuidv4()}
                     onClick={() => handleSort(key)}
                     style={{ cursor: "pointer" }}
                   >
