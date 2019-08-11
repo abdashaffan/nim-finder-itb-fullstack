@@ -9,11 +9,11 @@ export const asyncFetchStudentData = async (body, source) => {
    */
   try {
     if (!body.query || body.query.trim().length === 0) {
-      return {};
+      return {msg: "Please insert your query"};
     }
     source.token = axios.CancelToken.source();
     const res = await axios.post("api/students", body, {
-      cancelToken: source.token.token
+      cancelToken: source.token.token //this is right syntax
     });
     return res.data;
   } catch (err) {
