@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { asyncFetchStudentData } from "../utils/fetch";
 import Table from "./Table";
 import Input from "./Input";
-import useDebounce from "../hooks/useDebounce";
 
 const App = () => {
   const [response, setResponse] = useState({});
@@ -13,18 +12,14 @@ const App = () => {
     size: 20
   });
 
-  const debouncedQuery = useDebounce(search.query, 400);
-
   useEffect(() => {
+    let source = { token: null };
     const loadStudentData = async () => {
       setLoading(true);
-      const res = await asyncFetchStudentData({
-        query: debouncedQuery,
-        size: search.size,
-        offset: search.offset
-      });
+      const res = await asyncFetchStudentData(search, source);
+      console.log("TOKEN: ", source.token);
       if (res.data || res.msg) {
-        console.log(res);
+        console.log("RES :", res);
         setResponse(res);
       } else {
         setResponse({});
@@ -32,7 +27,13 @@ const App = () => {
       setLoading(false);
     };
     loadStudentData();
-  }, [debouncedQuery, search.offset, search.size]);
+
+    return () => {
+      if (source.token) {
+        source.token.cancel();
+      }
+    };
+  }, [search]);
 
   const handleChange = query => {
     setSearch({ ...search, query, offset: 0 });
