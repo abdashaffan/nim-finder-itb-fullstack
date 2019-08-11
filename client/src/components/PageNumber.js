@@ -1,10 +1,7 @@
 import React from "react";
 
 const PageNumber = ({ total, size, currentPage, handlePageClick }) => {
-  let pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(total / size); i++) {
-    pageNumbers.push(i);
-  }
+  const totalPageNumber = Math.ceil(total / size);
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination">
@@ -14,37 +11,68 @@ const PageNumber = ({ total, size, currentPage, handlePageClick }) => {
         >
           <span
             className="page-link"
-            aria-label="Previous"
-            onClick={() => handlePageClick(currentPage - 1)}
+            aria-label="First"
+            onClick={() => handlePageClick(1)}
           >
             <span aria-hidden="true">&laquo;</span>
-            <span className="sr-only">Previous</span>
+            <span className="sr-only">First</span>
           </span>
         </li>
-        {pageNumbers.map(num => (
-          <li
-            key={num}
-            className={"page-item " + (currentPage === num ? "active" : "")}
-            style={{ cursor: "pointer" }}
-            onClick={() => handlePageClick(num)}
-          >
-            <span className="page-link">{num}</span>
-          </li>
-        ))}
+
+        {currentPage > 1 && (
+          <>
+            <li
+              className={"page-item " + (currentPage === 1 ? "disabled" : "")}
+              style={{ cursor: "pointer" }}
+            >
+              <span
+                className="page-link"
+                aria-label="Previous"
+                onClick={() => handlePageClick(currentPage - 1)}
+              >
+                {currentPage - 1}
+              </span>
+            </li>
+          </>
+        )}
+
+        <li className="page-item disabled">
+          <span className="page-link">...</span>
+        </li>
+
+        {currentPage < totalPageNumber && (
+          <>
+            <li
+              className={
+                "page-item " +
+                (currentPage === totalPageNumber ? "disabled" : "")
+              }
+              style={{ cursor: "pointer" }}
+            >
+              <span
+                className="page-link"
+                aria-label="Next"
+                onClick={() => handlePageClick(currentPage + 1)}
+              >
+                {currentPage + 1}
+              </span>
+            </li>
+          </>
+        )}
+
         <li
           className={
-            "page-item " +
-            (currentPage === pageNumbers.length ? "disabled" : "")
+            "page-item " + (currentPage === totalPageNumber ? "disabled" : "")
           }
           style={{ cursor: "pointer" }}
         >
           <span
             className="page-link"
-            aria-label="Next"
-            onClick={() => handlePageClick(currentPage + 1)}
+            aria-label="Last"
+            onClick={() => handlePageClick(totalPageNumber)}
           >
             <span aria-hidden="true">&raquo;</span>
-            <span className="sr-only">Next</span>
+            <span className="sr-only">Last</span>
           </span>
         </li>
       </ul>
