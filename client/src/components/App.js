@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import Grid from "@material-ui/core/Grid";
 import { asyncFetchStudentData } from "../utils/fetch";
 import Table from "./Table";
 import Input from "./Input";
@@ -61,17 +62,19 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <Input handleAppChange={handleChange} />
-      <Table
-        response={response}
-        loading={loading}
-        handlePageClick={handlePageClick}
-        handleSort={handleSort}
-        sort={sortType}
-        handleChangeRows={handleChangeRows}
-      />
-    </div>
+    <Grid container direction="column" justify="center" alignItems="center">
+      <Grid item className="App">
+        <Input handleAppChange={handleChange} />
+        <Table
+          response={response}
+          loading={loading}
+          handlePageClick={handlePageClick}
+          handleSort={handleSort}
+          sort={sortType}
+          handleChangeRows={handleChangeRows}
+        />
+      </Grid>
+    </Grid>
   );
 };
 

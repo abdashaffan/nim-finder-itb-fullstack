@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableHead from "@material-ui/core/TableHead";
@@ -8,6 +9,7 @@ import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Hidden from "@material-ui/core/Hidden";
 import PageNumber from "./PageNumber";
 import Loader from "./Loader";
 
@@ -38,23 +40,15 @@ const TableData = ({
 }) => {
   const classes = useStyles();
   const { count, data, offset, size } = response;
-  const keys = [
-    "nama",
-    "nim_prodi",
-    "nim_tpb",
-    "prodi",
-    "fakultas",
-    "angkatan"
-  ];
   const toggleSort = key => {
     if (sort.name === key) {
       if (sort.toggle === 1) {
-        return <span>{key.replace("_", " ").toUpperCase()} &#9652;</span>;
+        return <span> &#9652;</span>;
       } else if (sort.toggle === -1) {
-        return <span> {key.replace("_", " ").toUpperCase()} &#9662;</span>;
+        return <span> &#9662;</span>;
       }
     }
-    return <span> {key.replace("_", " ").toUpperCase()}</span>;
+    return <span> </span>;
   };
   const handleChangeRowsPerPage = e => {
     handleChangeRows(parseInt(e.target.value));
@@ -66,15 +60,58 @@ const TableData = ({
           <Table className={classes.table} size="small">
             <TableHead>
               <TableRow>
-                {keys.map(key => (
+                <TableCell
+                  key={uuidv4()}
+                  onClick={() => handleSort("nama")}
+                  style={{ cursor: "pointer" }}
+                >
+                  Nama
+                  {toggleSort("nama")}
+                </TableCell>
+                <TableCell
+                  key={uuidv4()}
+                  onClick={() => handleSort("nim_prodi")}
+                  style={{ cursor: "pointer" }}
+                >
+                  NIM Prodi
+                  {toggleSort("nim_prodi")}
+                </TableCell>
+                <TableCell
+                  key={uuidv4()}
+                  onClick={() => handleSort("nim_tpb")}
+                  style={{ cursor: "pointer" }}
+                >
+                  NIM TPB
+                  {toggleSort("nim_tpb")}
+                </TableCell>
+                <TableCell
+                  key={uuidv4()}
+                  onClick={() => handleSort("prodi")}
+                  style={{ cursor: "pointer" }}
+                >
+                  Prodi
+                  {toggleSort("prodi")}
+                </TableCell>
+                <Hidden only={["xs", "sm", "md"]}>
                   <TableCell
                     key={uuidv4()}
-                    onClick={() => handleSort(key)}
+                    onClick={() => handleSort("fakultas")}
                     style={{ cursor: "pointer" }}
                   >
-                    {toggleSort(key)}
+                    Fakultas
+                    {toggleSort("fakultas")}
                   </TableCell>
-                ))}
+                </Hidden>
+                <Hidden only={["xs", "sm", "md"]}>
+                  <TableCell
+                    key={uuidv4()}
+                    onClick={() => handleSort("angkatan")}
+                    style={{ cursor: "pointer" }}
+                  >
+                    Angkatan
+                    {toggleSort("angkatan")}
+                  </TableCell>
+                </Hidden>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -84,26 +121,20 @@ const TableData = ({
                 </TableRow>
               ) : (
                 data &&
-                data.map(
-                  ({
-                    _id,
-                    nim_tpb,
-                    nim_prodi,
-                    angkatan,
-                    prodi,
-                    nama,
-                    fakultas
-                  }) => (
-                    <TableRow key={_id}>
-                      <TableCell>{nama}</TableCell>
-                      <TableCell>{nim_prodi}</TableCell>
-                      <TableCell>{nim_tpb}</TableCell>
-                      <TableCell>{prodi}</TableCell>
-                      <TableCell>{fakultas}</TableCell>
-                      <TableCell>{angkatan}</TableCell>
-                    </TableRow>
-                  )
-                )
+                data.map(d => (
+                  <TableRow key={d._id}>
+                    <TableCell>{d.nama}</TableCell>
+                    <TableCell>{d.nim_prodi}</TableCell>
+                    <TableCell>{d.nim_tpb}</TableCell>
+                    <TableCell>{d.prodi}</TableCell>
+                    <Hidden only={["xs", "sm", "md"]}>
+                      <TableCell>{d.fakultas}</TableCell>
+                    </Hidden>
+                    <Hidden only={["xs", "sm", "md"]}>
+                      <TableCell>{d.angkatan}</TableCell>
+                    </Hidden>
+                  </TableRow>
+                ))
               )}
             </TableBody>
             {data && data.length > 0 && (
