@@ -20,7 +20,7 @@ const PageNumber = props => {
   const { count, page, rowsPerPage, onChangePage } = props;
   const totalPage = Math.ceil(count / rowsPerPage);
   function handleFirstPageButtonClick() {
-    onChangePage(1);
+    onChangePage(0);
   }
 
   function handleBackButtonClick() {
