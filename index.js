@@ -3,9 +3,10 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const cors = require("cors");
+const path = require('path')
+// const cors = require("cors");
 
-app.use(cors());
+// app.use(cors());
 app.use(bodyParser.json());
 
 // MAIN HOMEPAGE ROUTE
@@ -16,6 +17,13 @@ app.get("/", (req, res) => {
 // Students - NIM Finder ITB
 const studentRoute = require("./server/routes/students");
 app.use("/api/students", studentRoute);
+
+if (process.env.NODE_NEV === 'production') {
+  app.use(express.static('client/build'))
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  })
+}
 
 mongoose.connect(process.env.DB_CONNECTION, {
   useNewUrlParser: true,
