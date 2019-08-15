@@ -4,15 +4,9 @@ const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require('path')
-// const cors = require("cors");
 
-// app.use(cors());
 app.use(bodyParser.json());
 
-// MAIN HOMEPAGE ROUTE
-app.get("/", (req, res) => {
-  res.send("<h1>Abdakadabra API Homepage</h1>");
-});
 
 // Students - NIM Finder ITB
 const studentRoute = require("./server/routes/students");
