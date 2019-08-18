@@ -4,7 +4,10 @@ const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require('path')
+const compression = require('compression')
 
+
+app.use(compression())
 app.use(bodyParser.json());
 
 
