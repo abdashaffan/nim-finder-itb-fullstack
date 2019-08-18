@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import App from "./components/App";
 // import WebFont from 'webfontloader';
 import "./index.css";
+import * as serviceWorker from './serviceWorker';
+
 
 // WebFont.load({
 //     google: {
@@ -12,3 +14,4 @@ import "./index.css";
 
 
 ReactDOM.render(<App />, document.getElementById("root"));
+serviceWorker.register();
