@@ -11,6 +11,11 @@ const useStyles1 = makeStyles(theme => ({
     flexShrink: 0,
     color: theme.palette.text.secondary,
     marginLeft: theme.spacing(2.5)
+  },
+  buttonRoot: {
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "10px"
+    }
   }
 }));
 
@@ -38,6 +43,7 @@ const PageNumber = props => {
   return (
     <div className={classes.root}>
       <IconButton
+        size="small"
         onClick={handleFirstPageButtonClick}
         disabled={page === 0}
         aria-label="first page"
@@ -45,6 +51,7 @@ const PageNumber = props => {
         {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
       </IconButton>
       <IconButton
+        size="small"
         onClick={handleBackButtonClick}
         disabled={page === 0}
         aria-label="previous page"
@@ -56,6 +63,7 @@ const PageNumber = props => {
         )}
       </IconButton>
       <IconButton
+        size="small"
         onClick={handleNextButtonClick}
         disabled={page >= totalPage - 1}
         aria-label="next page"
@@ -67,6 +75,7 @@ const PageNumber = props => {
         )}
       </IconButton>
       <IconButton
+        size="small"
         onClick={handleLastPageButtonClick}
         disabled={page >= totalPage - 1}
         aria-label="last page"

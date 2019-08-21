@@ -1,8 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import Grid from "@material-ui/core/Grid";
 import { asyncFetchStudentData } from "../utils/fetch";
+import { makeStyles } from "@material-ui/core/styles";
 import Table from "./Table";
 import Input from "./Input";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  }
+}));
 
 const App = () => {
   const [response, setResponse] = useState({});
@@ -14,6 +21,8 @@ const App = () => {
   });
   const [sortType, setSortType] = useState({ name: "nim_prodi", toggle: 1 });
   const firstUpdate = useRef(true);
+  const classes = useStyles();
+
   useEffect(() => {
     if (firstUpdate.current) {
       firstUpdate.current = false;
@@ -62,19 +71,21 @@ const App = () => {
   };
 
   return (
-    <Grid container direction="column" justify="center" alignItems="center">
-      <Grid item className="App">
-        <Input handleAppChange={handleChange} />
-        <Table
-          response={response}
-          loading={loading}
-          handlePageClick={handlePageClick}
-          handleSort={handleSort}
-          sort={sortType}
-          handleChangeRows={handleChangeRows}
-        />
+    <div className={classes.root}>
+      <Grid container direction="column" alignItems="center" justify="center">
+        <Grid item>
+          <Input handleAppChange={handleChange} />
+          <Table
+            response={response}
+            loading={loading}
+            handlePageClick={handlePageClick}
+            handleSort={handleSort}
+            sort={sortType}
+            handleChangeRows={handleChangeRows}
+          />
+        </Grid>
       </Grid>
-    </Grid>
+    </div>
   );
 };
 

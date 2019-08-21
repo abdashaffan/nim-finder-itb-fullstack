@@ -1,6 +1,16 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {Table,TableBody,TableHead,TableCell,TableFooter,TablePagination,TableRow,Paper,Hidden} from "@material-ui/core";
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableCell,
+  TableFooter,
+  TablePagination,
+  TableRow,
+  Paper,
+  Hidden
+} from "@material-ui/core";
 import PageNumber from "./PageNumber";
 import Loader from "./Loader";
 
@@ -12,12 +22,37 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(2),
     width: "100%",
-    overflowX: "auto",
-    marginBottom: theme.spacing(2)
+    overflowX: "auto"
   },
   table: {
-    minWidth: 650
+    [theme.breakpoints.down("lg")]: {
+      minWidth: 650
+    },
+    [theme.breakpoints.down("sm")]: {
+      minWidth: 400
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "100%"
+    }
+  },
+  tableCell: {
+    [theme.breakpoints.only("xs")]: {
+      padding: "2.5px 5px 2.5px 5px !important",
+      fontSize: "9px",
+      maxWidth: "100px"
+    }
+  },
+  caption: {
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "10px"
+    }
+  },
+  input: {
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "10px"
+    }
   }
 }));
 
@@ -52,6 +87,7 @@ const TableData = ({
             <TableHead>
               <TableRow>
                 <TableCell
+                  className={classes.tableCell}
                   key={uuidv4()}
                   onClick={() => handleSort("nama")}
                   style={{ cursor: "pointer" }}
@@ -60,6 +96,7 @@ const TableData = ({
                   {toggleSort("nama")}
                 </TableCell>
                 <TableCell
+                  className={classes.tableCell}
                   key={uuidv4()}
                   onClick={() => handleSort("nim_prodi")}
                   style={{ cursor: "pointer" }}
@@ -68,6 +105,7 @@ const TableData = ({
                   {toggleSort("nim_prodi")}
                 </TableCell>
                 <TableCell
+                  className={classes.tableCell}
                   key={uuidv4()}
                   onClick={() => handleSort("nim_tpb")}
                   style={{ cursor: "pointer" }}
@@ -76,6 +114,7 @@ const TableData = ({
                   {toggleSort("nim_tpb")}
                 </TableCell>
                 <TableCell
+                  className={classes.tableCell}
                   key={uuidv4()}
                   onClick={() => handleSort("prodi")}
                   style={{ cursor: "pointer" }}
@@ -85,6 +124,7 @@ const TableData = ({
                 </TableCell>
                 <Hidden only={["xs", "sm", "md"]}>
                   <TableCell
+                    className={classes.tableCell}
                     key={uuidv4()}
                     onClick={() => handleSort("fakultas")}
                     style={{ cursor: "pointer" }}
@@ -95,6 +135,7 @@ const TableData = ({
                 </Hidden>
                 <Hidden only={["xs", "sm", "md"]}>
                   <TableCell
+                    className={classes.tableCell}
                     key={uuidv4()}
                     onClick={() => handleSort("angkatan")}
                     style={{ cursor: "pointer" }}
@@ -107,22 +148,32 @@ const TableData = ({
             </TableHead>
             <TableBody>
               {loading ? (
-                <TableRow>
-                  <TableCell>Loading...</TableCell>
-                </TableRow>
+                <TableRow />
               ) : (
                 data &&
                 data.map(d => (
                   <TableRow key={d._id}>
-                    <TableCell>{d.nama}</TableCell>
-                    <TableCell>{d.nim_prodi}</TableCell>
-                    <TableCell>{d.nim_tpb}</TableCell>
-                    <TableCell>{d.prodi}</TableCell>
+                    <TableCell className={classes.tableCell}>
+                      {d.nama}
+                    </TableCell>
+                    <TableCell className={classes.tableCell}>
+                      {d.nim_prodi}
+                    </TableCell>
+                    <TableCell className={classes.tableCell}>
+                      {d.nim_tpb}
+                    </TableCell>
+                    <TableCell className={classes.tableCell}>
+                      {d.prodi}
+                    </TableCell>
                     <Hidden only={["xs", "sm", "md"]}>
-                      <TableCell>{d.fakultas}</TableCell>
+                      <TableCell className={classes.tableCell}>
+                        {d.fakultas}
+                      </TableCell>
                     </Hidden>
                     <Hidden only={["xs", "sm", "md"]}>
-                      <TableCell>{d.angkatan}</TableCell>
+                      <TableCell className={classes.tableCell}>
+                        {d.angkatan}
+                      </TableCell>
                     </Hidden>
                   </TableRow>
                 ))
@@ -132,6 +183,7 @@ const TableData = ({
               <TableFooter>
                 <TableRow>
                   <TablePagination
+                    classes={{ caption: classes.caption, input: classes.input }}
                     rowsPerPageOptions={[10, 20, 25, 100]}
                     colSpan={3}
                     count={count}
