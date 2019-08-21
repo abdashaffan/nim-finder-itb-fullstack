@@ -72,9 +72,11 @@ const App = () => {
 
   return (
     <div className={classes.root}>
-      <Grid container direction="column" alignItems="center" justify="center">
-        <Grid item>
+      <Grid container direction="column" alignItems="center">
+        <Grid item xs={12}>
           <Input handleAppChange={handleChange} />
+        </Grid>
+        <Grid item xs={12}>
           <Table
             response={response}
             loading={loading}

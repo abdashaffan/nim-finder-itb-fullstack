@@ -34,24 +34,24 @@ const useStyles = makeStyles(theme => ({
       minWidth: 400
     },
     [theme.breakpoints.down("xs")]: {
+      minWidth: 340,
       width: "100%"
     }
   },
   tableCell: {
     [theme.breakpoints.only("xs")]: {
-      padding: "2.5px 5px 2.5px 5px !important",
-      fontSize: "9px",
-      maxWidth: "100px"
+      // padding: "2px 12px 2px 12px !important",
+      fontSize: "9px"
     }
   },
   caption: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "10px"
+      fontSize: "9px"
     }
   },
   input: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "10px"
+      fontSize: "9px"
     }
   }
 }));
