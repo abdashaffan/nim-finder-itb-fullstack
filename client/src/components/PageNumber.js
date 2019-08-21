@@ -11,7 +11,7 @@ const useStyles1 = makeStyles(theme => ({
     flexShrink: 0,
     color: theme.palette.text.secondary,
     [theme.breakpoints.only("xs")]: {
-      marginLeft: theme.spacing(1.3)
+      marginLeft: theme.spacing(1)
     },
     marginLeft: theme.spacing(2.5)
   }
