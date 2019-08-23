@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import { asyncFetchStudentData } from "../utils/fetch";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,7 +8,9 @@ import Input from "./Input";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    paddingLeft: theme.spacing(2.5),
+    paddingRight: theme.spacing(2.5)
   }
 }));
 
@@ -72,6 +75,7 @@ const App = () => {
 
   return (
     <div className={classes.root}>
+      <CssBaseline />
       <Grid container direction="column" alignItems="center">
         <Grid item xs={12}>
           <Input handleAppChange={handleChange} />
