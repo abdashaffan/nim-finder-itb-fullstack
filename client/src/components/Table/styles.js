@@ -23,7 +23,8 @@ export const useStyles = makeStyles(theme => ({
   },
   tableCellRoot: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "12px"
+      fontSize: "12px",
+      padding: "8px 6px 8px 6px"
     }
   },
   paginationCaption: {
@@ -36,11 +37,6 @@ export const useStyles = makeStyles(theme => ({
       fontSize: "12px",
       marginLeft: "5px",
       marginRight: "15px"
-    }
-  },
-  tableCellSizeSmall: {
-    [theme.breakpoints.only("xs")]: {
-      padding: "6px 8px 6px 8px"
     }
   }
 }));

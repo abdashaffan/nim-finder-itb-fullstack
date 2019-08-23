@@ -50,10 +50,7 @@ const TableData = ({
             <TableHead>
               <TableRow>
                 <TableCell
-                  classes={
-                    { root: classes.tableCellRoot, sizeSmall: classes }
-                      .tableCellSizeSmall
-                  }
+                  classes={{ root: classes.tableCellRoot }}
                   key={uuidv4()}
                   onClick={() => handleSort("nama")}
                   style={{
@@ -67,10 +64,7 @@ const TableData = ({
                   </span>
                 </TableCell>
                 <TableCell
-                  classes={
-                    { root: classes.tableCellRoot, sizeSmall: classes }
-                      .tableCellSizeSmall
-                  }
+                  classes={{ root: classes.tableCellRoot }}
                   key={uuidv4()}
                   onClick={() => handleSort("nim_prodi")}
                   style={{
@@ -84,10 +78,7 @@ const TableData = ({
                   </span>
                 </TableCell>
                 <TableCell
-                  classes={
-                    { root: classes.tableCellRoot, sizeSmall: classes }
-                      .tableCellSizeSmall
-                  }
+                  classes={{ root: classes.tableCellRoot }}
                   key={uuidv4()}
                   onClick={() => handleSort("nim_tpb")}
                   style={{
@@ -101,10 +92,7 @@ const TableData = ({
                   </span>
                 </TableCell>
                 <TableCell
-                  classes={
-                    { root: classes.tableCellRoot, sizeSmall: classes }
-                      .tableCellSizeSmall
-                  }
+                  classes={{ root: classes.tableCellRoot }}
                   key={uuidv4()}
                   onClick={() => handleSort("prodi")}
                   style={{

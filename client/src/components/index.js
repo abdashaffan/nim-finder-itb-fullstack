@@ -9,8 +9,8 @@ import Input from "./Input";
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    paddingLeft: theme.spacing(2.5),
-    paddingRight: theme.spacing(2.5)
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1)
   }
 }));
 
