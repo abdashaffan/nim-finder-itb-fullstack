@@ -1,32 +1,14 @@
 import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
-
-const useStyles1 = makeStyles(theme => ({
-  root: {
-    flexShrink: 0,
-    color: theme.palette.text.secondary,
-    [theme.breakpoints.only("xs")]: {
-      marginLeft: theme.spacing(1)
-    },
-    marginLeft: theme.spacing(2.5)
-  },
-  iconRoot: {
-    [theme.breakpoints.only("xs")]: {
-      width: 20,
-      height: 20,
-      padding: 1,
-      fontWeight: "bold"
-    }
-  }
-}));
+import { useStyles } from "./styles";
 
 const PageNumber = props => {
-  const classes = useStyles1();
+  const classes = useStyles();
   const theme = useTheme();
   const { count, page, rowsPerPage, onChangePage } = props;
   const totalPage = Math.ceil(count / rowsPerPage);
