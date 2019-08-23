@@ -14,6 +14,14 @@ const useStyles1 = makeStyles(theme => ({
       marginLeft: theme.spacing(1)
     },
     marginLeft: theme.spacing(2.5)
+  },
+  iconRoot: {
+    [theme.breakpoints.only("xs")]: {
+      width: 20,
+      height: 20,
+      padding: 1,
+      fontWeight: "bold"
+    }
   }
 }));
 
@@ -46,7 +54,11 @@ const PageNumber = props => {
         disabled={page === 0}
         aria-label="first page"
       >
-        {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
+        {theme.direction === "rtl" ? (
+          <LastPageIcon classes={{ root: classes.iconRoot }} />
+        ) : (
+          <FirstPageIcon classes={{ root: classes.iconRoot }} />
+        )}
       </IconButton>
       <IconButton
         size="small"
@@ -55,9 +67,9 @@ const PageNumber = props => {
         aria-label="previous page"
       >
         {theme.direction === "rtl" ? (
-          <KeyboardArrowRight />
+          <KeyboardArrowRight classes={{ root: classes.iconRoot }} />
         ) : (
-          <KeyboardArrowLeft />
+          <KeyboardArrowLeft classes={{ root: classes.iconRoot }} />
         )}
       </IconButton>
       <IconButton
@@ -67,9 +79,9 @@ const PageNumber = props => {
         aria-label="next page"
       >
         {theme.direction === "rtl" ? (
-          <KeyboardArrowLeft />
+          <KeyboardArrowLeft classes={{ root: classes.iconRoot }} />
         ) : (
-          <KeyboardArrowRight />
+          <KeyboardArrowRight classes={{ root: classes.iconRoot }} />
         )}
       </IconButton>
       <IconButton
@@ -78,7 +90,11 @@ const PageNumber = props => {
         disabled={page >= totalPage - 1}
         aria-label="last page"
       >
-        {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
+        {theme.direction === "rtl" ? (
+          <FirstPageIcon classes={{ root: classes.iconRoot }} />
+        ) : (
+          <LastPageIcon classes={{ root: classes.iconRoot }} />
+        )}
       </IconButton>
     </div>
   );

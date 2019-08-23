@@ -51,7 +51,9 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "9px"
+      fontSize: "9px",
+      marginLeft: "5px",
+      marginRight: "15px"
     }
   }
 }));
@@ -183,6 +185,7 @@ const TableData = ({
               <TableFooter>
                 <TableRow>
                   <TablePagination
+                    labelRowsPerPage="Jumlah:"
                     classes={{ caption: classes.caption, input: classes.input }}
                     rowsPerPageOptions={[10, 20, 25, 100]}
                     colSpan={3}
