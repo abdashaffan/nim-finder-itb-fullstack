@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
-import { useStyles } from "./style";
+import { useStyles } from "./styles";
 
 const Input = ({ handleAppChange }) => {
   const [input, setInput] = useState("");

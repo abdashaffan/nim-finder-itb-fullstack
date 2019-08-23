@@ -1,6 +1,6 @@
 import React from "react";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import { useStyles } from "./style";
+import { useStyles } from "./styles";
 
 const Loader = () => {
   const classes = useStyles();
