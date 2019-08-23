@@ -33,7 +33,10 @@ const TableData = ({
         return <span> &#9662;</span>;
       }
     }
-    return <span> </span>;
+    return "";
+  };
+  const headerColorActive = key => {
+    return ActiveArrow(key) ? "#1976d2" : "rgba(0,0,0,0.54)";
   };
   const handleChangeRowsPerPage = e => {
     handleChangeRows(parseInt(e.target.value));
@@ -46,61 +49,109 @@ const TableData = ({
             <TableHead>
               <TableRow>
                 <TableCell
-                  className={classes.tableCell}
+                  classes={
+                    { root: classes.tableCellRoot, sizeSmall: classes }
+                      .tableCellSizeSmall
+                  }
                   key={uuidv4()}
                   onClick={() => handleSort("nama")}
-                  style={{ cursor: "pointer" }}
+                  style={{
+                    cursor: "pointer",
+                    color: headerColorActive("nama")
+                  }}
                 >
-                  Nama
-                  {ActiveArrow("nama")}
+                  <span>
+                    Nama
+                    {ActiveArrow("nama")}
+                  </span>
                 </TableCell>
                 <TableCell
-                  className={classes.tableCell}
+                  classes={
+                    { root: classes.tableCellRoot, sizeSmall: classes }
+                      .tableCellSizeSmall
+                  }
                   key={uuidv4()}
                   onClick={() => handleSort("nim_prodi")}
-                  style={{ cursor: "pointer" }}
+                  style={{
+                    cursor: "pointer",
+                    color: headerColorActive("nim_prodi")
+                  }}
                 >
-                  NIM Prodi
-                  {ActiveArrow("nim_prodi")}
+                  <span>
+                    NIM Prodi
+                    {ActiveArrow("nim_prodi")}
+                  </span>
                 </TableCell>
                 <TableCell
-                  className={classes.tableCell}
+                  classes={
+                    { root: classes.tableCellRoot, sizeSmall: classes }
+                      .tableCellSizeSmall
+                  }
                   key={uuidv4()}
                   onClick={() => handleSort("nim_tpb")}
-                  style={{ cursor: "pointer" }}
+                  style={{
+                    cursor: "pointer",
+                    color: headerColorActive("nim_tpb")
+                  }}
                 >
-                  NIM TPB
-                  {ActiveArrow("nim_tpb")}
+                  <span>
+                    NIM TPB
+                    {ActiveArrow("nim_tpb")}
+                  </span>
                 </TableCell>
                 <TableCell
-                  className={classes.tableCell}
+                  classes={
+                    { root: classes.tableCellRoot, sizeSmall: classes }
+                      .tableCellSizeSmall
+                  }
                   key={uuidv4()}
                   onClick={() => handleSort("prodi")}
-                  style={{ cursor: "pointer" }}
+                  style={{
+                    cursor: "pointer",
+                    color: headerColorActive("prodi")
+                  }}
                 >
-                  Prodi
-                  {ActiveArrow("prodi")}
+                  <span>
+                    Prodi
+                    {ActiveArrow("prodi")}
+                  </span>
                 </TableCell>
                 <Hidden only={["xs", "sm", "md"]}>
                   <TableCell
-                    className={classes.tableCell}
+                    classes={
+                      { root: classes.tableCellRoot, sizeSmall: classes }
+                        .tableCellSizeSmall
+                    }
                     key={uuidv4()}
                     onClick={() => handleSort("fakultas")}
-                    style={{ cursor: "pointer" }}
+                    style={{
+                      cursor: "pointer",
+                      color: headerColorActive("fakultas")
+                    }}
                   >
-                    Fakultas
-                    {ActiveArrow("fakultas")}
+                    <span>
+                      Fakultas
+                      {ActiveArrow("fakultas")}
+                    </span>
                   </TableCell>
                 </Hidden>
                 <Hidden only={["xs", "sm", "md"]}>
                   <TableCell
-                    className={classes.tableCell}
+                    classes={
+                      { root: classes.tableCellRoot, sizeSmall: classes }
+                        .tableCellSizeSmall
+                    }
                     key={uuidv4()}
                     onClick={() => handleSort("angkatan")}
-                    style={{ cursor: "pointer" }}
+                    style={{
+                      cursor: "pointer",
+                      color: headerColorActive("angkatan")
+                    }}
                   >
-                    Angkatan
-                    {ActiveArrow("angkatan")}
+                    <span>
+                      Angkatan
+                      {ActiveArrow("angkatan")}
+                    </span>
                   </TableCell>
                 </Hidden>
               </TableRow>
@@ -112,25 +163,55 @@ const TableData = ({
                 data &&
                 data.map(d => (
                   <TableRow key={d._id}>
-                    <TableCell className={classes.tableCell}>
+                    <TableCell
+                      classes={{
+                        root: classes.tableCellRoot,
+                        sizeSmall: classes.tableCellSizeSmall
+                      }}
+                    >
                       {d.nama}
                     </TableCell>
-                    <TableCell className={classes.tableCell}>
+                    <TableCell
+                      classes={{
+                        root: classes.tableCellRoot,
+                        sizeSmall: classes.tableCellSizeSmall
+                      }}
+                    >
                       {d.nim_prodi}
                     </TableCell>
-                    <TableCell className={classes.tableCell}>
+                    <TableCell
+                      classes={{
+                        root: classes.tableCellRoot,
+                        sizeSmall: classes.tableCellSizeSmall
+                      }}
+                    >
                       {d.nim_tpb}
                     </TableCell>
-                    <TableCell className={classes.tableCell}>
+                    <TableCell
+                      classes={{
+                        root: classes.tableCellRoot,
+                        sizeSmall: classes.tableCellSizeSmall
+                      }}
+                    >
                       {d.prodi}
                     </TableCell>
                     <Hidden only={["xs", "sm", "md"]}>
-                      <TableCell className={classes.tableCell}>
+                      <TableCell
+                        classes={{
+                          root: classes.tableCellRoot,
+                          sizeSmall: classes.tableCellSizeSmall
+                        }}
+                      >
                         {d.fakultas}
                       </TableCell>
                     </Hidden>
                     <Hidden only={["xs", "sm", "md"]}>
-                      <TableCell className={classes.tableCell}>
+                      <TableCell
+                        classes={{
+                          root: classes.tableCellRoot,
+                          sizeSmall: classes.tableCellSizeSmall
+                        }}
+                      >
                         {d.angkatan}
                       </TableCell>
                     </Hidden>
@@ -143,7 +224,10 @@ const TableData = ({
                 <TableRow>
                   <TablePagination
                     labelRowsPerPage="Jumlah:"
-                    classes={{ caption: classes.caption, input: classes.input }}
+                    classes={{
+                      caption: classes.paginationCaption,
+                      input: classes.paginationInput
+                    }}
                     rowsPerPageOptions={[10, 20, 25, 100]}
                     colSpan={3}
                     count={count}

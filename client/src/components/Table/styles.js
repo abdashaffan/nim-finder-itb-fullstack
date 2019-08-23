@@ -14,29 +14,33 @@ export const useStyles = makeStyles(theme => ({
       minWidth: 650
     },
     [theme.breakpoints.down("sm")]: {
-      minWidth: 400
+      minWidth: 500
     },
     [theme.breakpoints.down("xs")]: {
       minWidth: 340,
       width: "100%"
     }
   },
-  tableCell: {
+  tableCellRoot: {
     [theme.breakpoints.only("xs")]: {
-      // padding: "2px 12px 2px 12px !important",
-      fontSize: "9px"
+      fontSize: "12px"
     }
   },
-  caption: {
+  paginationCaption: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "9px"
+      fontSize: "12px"
     }
   },
-  input: {
+  paginationInput: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "9px",
+      fontSize: "12px",
       marginLeft: "5px",
       marginRight: "15px"
+    }
+  },
+  tableCellSizeSmall: {
+    [theme.breakpoints.only("xs")]: {
+      padding: "6px 8px 6px 8px"
     }
   }
 }));
