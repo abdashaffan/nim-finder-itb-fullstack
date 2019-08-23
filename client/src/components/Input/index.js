@@ -17,6 +17,7 @@ const Input = ({ handleAppChange }) => {
       label="Nama/NIM"
       className={classes.textField}
       value={input}
+      autoComplete="off"
       onChange={handleChange}
       margin="normal"
     />
