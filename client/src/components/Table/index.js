@@ -25,7 +25,7 @@ const TableData = ({
 }) => {
   const classes = useStyles();
   const { count, data, offset, size } = response;
-  const toggleSort = key => {
+  const ActiveArrow = key => {
     if (sort.name === key) {
       if (sort.toggle === 1) {
         return <span> &#9652;</span>;
@@ -52,7 +52,7 @@ const TableData = ({
                   style={{ cursor: "pointer" }}
                 >
                   Nama
-                  {toggleSort("nama")}
+                  {ActiveArrow("nama")}
                 </TableCell>
                 <TableCell
                   className={classes.tableCell}
@@ -61,7 +61,7 @@ const TableData = ({
                   style={{ cursor: "pointer" }}
                 >
                   NIM Prodi
-                  {toggleSort("nim_prodi")}
+                  {ActiveArrow("nim_prodi")}
                 </TableCell>
                 <TableCell
                   className={classes.tableCell}
@@ -70,7 +70,7 @@ const TableData = ({
                   style={{ cursor: "pointer" }}
                 >
                   NIM TPB
-                  {toggleSort("nim_tpb")}
+                  {ActiveArrow("nim_tpb")}
                 </TableCell>
                 <TableCell
                   className={classes.tableCell}
@@ -79,7 +79,7 @@ const TableData = ({
                   style={{ cursor: "pointer" }}
                 >
                   Prodi
-                  {toggleSort("prodi")}
+                  {ActiveArrow("prodi")}
                 </TableCell>
                 <Hidden only={["xs", "sm", "md"]}>
                   <TableCell
@@ -89,7 +89,7 @@ const TableData = ({
                     style={{ cursor: "pointer" }}
                   >
                     Fakultas
-                    {toggleSort("fakultas")}
+                    {ActiveArrow("fakultas")}
                   </TableCell>
                 </Hidden>
                 <Hidden only={["xs", "sm", "md"]}>
@@ -100,7 +100,7 @@ const TableData = ({
                     style={{ cursor: "pointer" }}
                   >
                     Angkatan
-                    {toggleSort("angkatan")}
+                    {ActiveArrow("angkatan")}
                   </TableCell>
                 </Hidden>
               </TableRow>
