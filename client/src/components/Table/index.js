@@ -36,7 +36,7 @@ const TableData = ({
     return "";
   };
   const headerColorActive = key => {
-    return ActiveArrow(key) ? "#1976d2" : "rgba(0,0,0,0.54)";
+    return ActiveArrow(key) ? "rgba(35, 46, 115, 0.81)" : "rgba(0,0,0,0.54)";
   };
   const handleChangeRowsPerPage = e => {
     handleChangeRows(parseInt(e.target.value));
@@ -61,7 +61,7 @@ const TableData = ({
                     color: headerColorActive("nama")
                   }}
                 >
-                  <span>
+                  <span style={{ fontWeight: "bold" }}>
                     Nama
                     {ActiveArrow("nama")}
                   </span>
@@ -78,7 +78,7 @@ const TableData = ({
                     color: headerColorActive("nim_prodi")
                   }}
                 >
-                  <span>
+                  <span style={{ fontWeight: "bold" }}>
                     NIM Prodi
                     {ActiveArrow("nim_prodi")}
                   </span>
@@ -95,7 +95,7 @@ const TableData = ({
                     color: headerColorActive("nim_tpb")
                   }}
                 >
-                  <span>
+                  <span style={{ fontWeight: "bold" }}>
                     NIM TPB
                     {ActiveArrow("nim_tpb")}
                   </span>
@@ -112,7 +112,7 @@ const TableData = ({
                     color: headerColorActive("prodi")
                   }}
                 >
-                  <span>
+                  <span style={{ fontWeight: "bold" }}>
                     Prodi
                     {ActiveArrow("prodi")}
                   </span>
@@ -130,7 +130,7 @@ const TableData = ({
                       color: headerColorActive("fakultas")
                     }}
                   >
-                    <span>
+                    <span style={{ fontWeight: "bold" }}>
                       Fakultas
                       {ActiveArrow("fakultas")}
                     </span>
@@ -149,7 +149,7 @@ const TableData = ({
                       color: headerColorActive("angkatan")
                     }}
                   >
-                    <span>
+                    <span style={{ fontWeight: "bold" }}>
                       Angkatan
                       {ActiveArrow("angkatan")}
                     </span>
