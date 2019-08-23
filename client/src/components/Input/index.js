@@ -13,6 +13,7 @@ const Input = ({ handleAppChange }) => {
 
   return (
     <TextField
+      autoFocus
       id="name"
       label="Nama/NIM"
       className={classes.textField}
