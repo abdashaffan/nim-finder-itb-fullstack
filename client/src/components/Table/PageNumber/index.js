@@ -1,15 +1,13 @@
 import React from "react";
-import { useTheme } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
+import NavButton from "./NavButton";
 import { useStyles } from "./styles";
 
 const PageNumber = props => {
   const classes = useStyles();
-  const theme = useTheme();
   const { count, page, rowsPerPage, onChangePage } = props;
   const totalPage = Math.ceil(count / rowsPerPage);
   function handleFirstPageButtonClick() {
@@ -30,54 +28,34 @@ const PageNumber = props => {
 
   return (
     <div className={classes.root}>
-      <IconButton
-        size="small"
-        onClick={handleFirstPageButtonClick}
-        disabled={page === 0}
-        aria-label="first page"
+      <NavButton
+        handleClick={handleFirstPageButtonClick}
+        disabledCondition={page === 0}
+        ariaLabel="first page"
       >
-        {theme.direction === "rtl" ? (
-          <LastPageIcon classes={{ root: classes.iconRoot }} />
-        ) : (
-          <FirstPageIcon classes={{ root: classes.iconRoot }} />
-        )}
-      </IconButton>
-      <IconButton
-        size="small"
-        onClick={handleBackButtonClick}
-        disabled={page === 0}
-        aria-label="previous page"
+        <FirstPageIcon classes={{ root: classes.iconRoot }} />
+      </NavButton>
+      <NavButton
+        handleClick={handleBackButtonClick}
+        disabledCondition={page === 0}
+        ariaLabel="previous page"
       >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowRight classes={{ root: classes.iconRoot }} />
-        ) : (
-          <KeyboardArrowLeft classes={{ root: classes.iconRoot }} />
-        )}
-      </IconButton>
-      <IconButton
-        size="small"
-        onClick={handleNextButtonClick}
-        disabled={page >= totalPage - 1}
-        aria-label="next page"
+        <KeyboardArrowLeft classes={{ root: classes.iconRoot }} />
+      </NavButton>
+      <NavButton
+        handleClick={handleNextButtonClick}
+        disabledCondition={page >= totalPage - 1}
+        ariaLabel="next page"
       >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowLeft classes={{ root: classes.iconRoot }} />
-        ) : (
-          <KeyboardArrowRight classes={{ root: classes.iconRoot }} />
-        )}
-      </IconButton>
-      <IconButton
-        size="small"
-        onClick={handleLastPageButtonClick}
-        disabled={page >= totalPage - 1}
-        aria-label="last page"
+        <KeyboardArrowRight classes={{ root: classes.iconRoot }} />
+      </NavButton>
+      <NavButton
+        handleClick={handleLastPageButtonClick}
+        disabledCondition={page >= totalPage - 1}
+        ariaLabel="last page"
       >
-        {theme.direction === "rtl" ? (
-          <FirstPageIcon classes={{ root: classes.iconRoot }} />
-        ) : (
-          <LastPageIcon classes={{ root: classes.iconRoot }} />
-        )}
-      </IconButton>
+        <LastPageIcon classes={{ root: classes.iconRoot }} />
+      </NavButton>
     </div>
   );
 };
