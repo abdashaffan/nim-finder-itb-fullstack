@@ -45,6 +45,7 @@ const TableData = ({
     <>
       <div className={classes.root}>
         <Paper className={classes.paper}>
+          {loading && <Loader />}
           <Table className={classes.table} size="small">
             <TableHead>
               <TableRow>
@@ -247,7 +248,6 @@ const TableData = ({
           </Table>
         </Paper>
       </div>
-      {loading && <Loader />}
     </>
   );
 };
